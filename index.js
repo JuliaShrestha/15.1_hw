@@ -26,18 +26,18 @@ function saveTasks() {
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     tasks.forEach(task => {
-        let newTask = document.createElement('li');
+        const newTask = document.createElement('li');
         newTask.classList.add('todo-item');
         
-        let checkbox = document.createElement('input');
+        const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.checked = task.checked;
 
-        let span = document.createElement('span');
+        const span = document.createElement('span');
         span.classList.add('todo-item__description');
         span.innerText = task.text;
 
-        let newDeleteButton = document.createElement('button');
+        const newDeleteButton = document.createElement('button');
         newDeleteButton.innerText = 'Видалити';
         newDeleteButton.classList.add('todo-item__delete');
 
@@ -61,35 +61,37 @@ function handleCheckboxChange(event) {
 document.addEventListener('DOMContentLoaded', loadTasks);
 
 addTaskButton.addEventListener('click', () => {
-    let taskText = input.value;
+    const taskText = input.value;
 
-    if(taskText.trim() !=='') {
-        let newTask = document.createElement('li');
-        newTask.classList.add('todo-item');
-        
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-
-        let span = document.createElement('span');
-        span.classList.add('todo-item__description');
-        span.innerText = taskText;
-
-        let newDeleteButton = document.createElement('button');
-        newDeleteButton.innerText = 'Видалити';
-        newDeleteButton.classList.add('todo-item__delete');
-
-        newTask.appendChild(checkbox);
-        newTask.appendChild(span);
-        newTask.appendChild(newDeleteButton);
-
-        taskList.appendChild(newTask);
-
-        checkbox.addEventListener('change', handleCheckboxChange);
-
-        saveTasks();
-
-        input.value = '';
+    if(taskText.trim() ==='') { 
+        return;
     }
+
+    const newTask = document.createElement('li');
+    newTask.classList.add('todo-item');
+        
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+
+    const span = document.createElement('span');
+    span.classList.add('todo-item__description');
+    span.innerText = taskText;
+
+    const newDeleteButton = document.createElement('button');
+    newDeleteButton.innerText = 'Видалити';
+    newDeleteButton.classList.add('todo-item__delete');
+
+    newTask.appendChild(checkbox);
+    newTask.appendChild(span);
+    newTask.appendChild(newDeleteButton);
+
+    taskList.appendChild(newTask);
+
+    checkbox.addEventListener('change', handleCheckboxChange);
+
+    saveTasks();
+
+    input.value = '';
 });
 
 taskList.addEventListener('click', (event) => {
